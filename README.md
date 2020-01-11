@@ -5,4 +5,4 @@ Simple multi container app to understand docker
 
 ![](images/architecture.png)
 
-![](images/containers.png)
+![](images/containers.PNG)
