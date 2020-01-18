@@ -6,3 +6,5 @@ Simple multi container app to understand docker
 ![](images/architecture.png)
 
 ![](images/containers.PNG)
+
+![](images/k8s-architecture.PNG)
