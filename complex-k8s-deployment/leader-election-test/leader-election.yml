@@ -1,0 +1,38 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+    name: node-leader-election
+spec:
+    replicas: 3
+    selector:
+        matchLabels:
+            component: test
+    template:
+        metadata:
+            labels:
+                component: test
+        spec:
+            containers:
+                -   image: kdocker94/node-leader-election:latest
+                    imagePullPolicy: IfNotPresent
+                    name: nodejs
+                    ports:
+                        -   containerPort: 8080
+                            protocol: TCP
+                    env:
+                        -   name: LEADER_HOST
+                            value: 'localhost'
+                        -   name: LEADER_PORT
+                            value: '4040'
+                    resources:
+                        requests:
+                            cpu: 100m
+                -   image: k8s.gcr.io/leader-elector:0.5
+                    imagePullPolicy: IfNotPresent
+                    name: elector
+                    ports:
+                        -   containerPort: 4040
+                            protocol: TCP
+                    resources:
+                        requests:
+                            cpu: 100m
